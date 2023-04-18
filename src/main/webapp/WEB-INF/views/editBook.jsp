@@ -29,7 +29,8 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>
+                <li><a href="<%=request.getContextPath()%>/home"
+                    class="menu">Home</a></li>
                 <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>
             </ul>
         </div>
@@ -86,13 +87,8 @@
                     </div>
                     <div>
                         <span>ISBN</span><span class="care care1">任意</span>
-                        <c:if test="${!empty bookInfo}">
-                            <input type="text" name="isbn"
-                                value="${bookInfo.isbn}">
-                        </c:if>
-                        <c:if test="${empty bookInfo}">
-                            <input type="text" name="isbn">
-                        </c:if>
+                        <input type="text" name="isbn"
+                            value="${bookInfo.isbn}">
                     </div>
                     <div>
                         <span>説明文</span><span class="care care1">任意</span>
