@@ -61,7 +61,7 @@ public class BookUtil {
 			String date3 = formatter.format(date2);
 			publishDate.equals(date3);
 			return true;
-			
+
 		} catch (Exception p) {
 			p.printStackTrace();
 			return false;
@@ -76,7 +76,7 @@ public class BookUtil {
 	 */
 	private static boolean isValidIsbn(String isbn) {
 		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４）
-		
+
 		if (!(isbn.isEmpty())) {
 			if (isbn.matches("^[0-9]{10,13}")) {
 				return true;
