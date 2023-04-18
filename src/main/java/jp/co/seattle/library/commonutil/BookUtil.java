@@ -88,7 +88,6 @@ public class BookUtil {
 		}
 
 	}
-
 	/**
 	 * 必須項目の存在チェック
 	 * 
