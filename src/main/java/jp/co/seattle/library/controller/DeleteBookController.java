@@ -22,15 +22,7 @@ public class DeleteBookController {
 	private BooksService booksService;
 	/**
 	 * 書籍情報を削除する
-	 * 
-	 * @param locale      ロケール情報
-	 * @param title       書籍名
-	 * @param author      著者名
-	 * @param publisher   出版社
-	 * @param publishDate 出版日
-	 * @param file        サムネイルファイル
-	 * @param isbn        ISBN
-	 * @param description 説明文
+	 * @param bookId
 	 * @param model       モデル
 	 * @return 遷移先画面
 	 */
