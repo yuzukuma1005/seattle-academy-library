@@ -62,7 +62,7 @@ public class PasswordResetConttoller {
 			model.addAttribute("errorMessage", "パスワードは8文字以上かつ半角英数字に設定してください。");
 			return "passwordReset";
 		}
-		return "redirect:/login";
+		return "redirect:/";
 	}
 
 }
