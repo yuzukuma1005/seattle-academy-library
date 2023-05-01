@@ -56,7 +56,7 @@ public class UsersService {
 
 		// SQL生成
 		String sql = "UPDATE users SET password = ?, upd_date = now() WHERE email = ?";
-
+		
 		jdbcTemplate.update(sql, userInfo.getPassword(), userInfo.getEmail());
 	}
 
