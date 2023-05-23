@@ -20,21 +20,27 @@ public class BookInfo {
 	private String publisher;
 
 	private String publishDate;
+	
+	private String classification;
 
 	private String thumbnail;
+	
+	private String favorit;
 
 	public BookInfo() {
 
 	}
 
 	// コンストラクタ
-	public BookInfo(int bookId, String title, String author, String publisher, String publishDate, String thumbnail) {
+	public BookInfo(int bookId, String title, String author, String publisher, String publishDate, String classification, String thumbnail, String favorit) {
 		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
 		this.publishDate = publishDate;
+		this.classification = classification;
 		this.thumbnail = thumbnail;
+		this.favorit = favorit;
 	}
 
 }

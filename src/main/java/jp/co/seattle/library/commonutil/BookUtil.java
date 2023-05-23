@@ -95,9 +95,9 @@ public class BookUtil {
 	 * @return タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue。
 	 */
 	private static boolean isEmptyBookInfo(BookDetailsInfo bookInfo) {
-		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）
+		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）+　分類に入力がない場合もtrue
 		if (!StringUtils.isEmpty(bookInfo.getTitle()) && !StringUtils.isEmpty(bookInfo.getAuthor())
-				&& !StringUtils.isEmpty(bookInfo.getPublisher()) && !StringUtils.isEmpty(bookInfo.getPublishDate())) {
+				&& !StringUtils.isEmpty(bookInfo.getPublisher()) && !StringUtils.isEmpty(bookInfo.getPublishDate()) && !StringUtils.isEmpty(bookInfo.getClassification())) {
 			return false;
 		} else {
 

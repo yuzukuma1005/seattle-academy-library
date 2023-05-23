@@ -84,6 +84,15 @@
                         </c:if>
                     </div>
                     <div>
+                        <span>ジャンル</span><span class="care care2">必須</span>
+                        <c:if test="${!empty bookInfo}">
+                            <input type="text" name="classification" value="${bookInfo.classification}">
+                        </c:if>
+                        <c:if test="${empty bookInfo}">
+                            <input type="text" name="classification">
+                        </c:if>
+                    </div>
+                    <div>
                         <span>ISBN</span><span class="care care1">任意</span>
                         <c:if test="${!empty bookInfo}">
                             <input type="text" name="isbn" value="${bookInfo.isbn}">

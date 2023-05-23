@@ -45,6 +45,7 @@ public class EditBookController {
 	 * @param author      著者名
 	 * @param publisher   出版社
 	 * @param publishDate 出版日
+	 * @param classification　分類（追加実装）
 	 * @param file        サムネイルファイル
 	 * @param isbn        ISBN
 	 * @param description 説明文
@@ -55,8 +56,9 @@ public class EditBookController {
 	@RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String updateBook(Locale locale, @RequestParam("bookId") int bookId, @RequestParam("title") String title,
 			@RequestParam("author") String author, @RequestParam("publisher") String publisher,
-			@RequestParam("publishDate") String publishDate, @RequestParam("isbn") String isbn,
-			@RequestParam("description") String description, @RequestParam("thumbnail") MultipartFile file,
+			@RequestParam("publishDate") String publishDate, @RequestParam("classification") String classification, 
+			@RequestParam("isbn") String isbn, @RequestParam("description") String description, 
+			@RequestParam("thumbnail") MultipartFile file,
 			Model model) {
 		logger.info("Welcome updateBook! The client locale is {}.", locale);
 
@@ -67,6 +69,7 @@ public class EditBookController {
 		bookInfo.setAuthor(author);
 		bookInfo.setPublisher(publisher);
 		bookInfo.setPublishDate(publishDate);
+		bookInfo.setClassification(classification);
 		bookInfo.setIsbn(isbn);
 		bookInfo.setDescription(description);
 

@@ -86,6 +86,11 @@
                             value="${bookInfo.publishDate}">
                     </div>
                     <div>
+                        <span>分類</span><span class="care care2">必須</span>
+                        <input type="text" name="classification"
+                            value="${bookInfo.classification}">
+                    </div>
+                    <div>
                         <span>ISBN</span><span class="care care1">任意</span>
                         <input type="text" name="isbn"
                             value="${bookInfo.isbn}">

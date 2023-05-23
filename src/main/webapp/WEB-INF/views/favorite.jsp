@@ -48,7 +48,7 @@
             href="<%=request.getContextPath()%>/favoriteBook"
             class="btn_fav_book">お気に入り書籍</a>
         <div class="conteiner">
-            <form method="get" action="class">
+            <form method="get" action="favClass">
                 <label class="selectbox-003"> <select
                     name="category">
                         <option value="選択">--選択--</option>
@@ -82,7 +82,7 @@
                 <div class="error_msg">${resultMessage}</div>
             </c:if>
             <div>
-                <div class="booklist">
+                <div class="favoriteBook">
                     <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
                             <form method="get" class="book_thumnail"

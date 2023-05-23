@@ -21,6 +21,8 @@ public class BookDetailsInfo {
 	private String publisher;
 
 	private String publishDate;
+	
+	private String classification;
 
 	private String thumbnailUrl;
 
@@ -29,5 +31,7 @@ public class BookDetailsInfo {
 	private String isbn;
 
 	private String description;
+	
+	private String favorit;
 
 }
