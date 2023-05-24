@@ -153,10 +153,11 @@
                                 </c:if>
                             </ul>
                         </div>
-                    </c:forEach>
+                    </c:forEach>                   
                 </div>
             </div>
         </div>
     </main>
 </body>
 </html>
+

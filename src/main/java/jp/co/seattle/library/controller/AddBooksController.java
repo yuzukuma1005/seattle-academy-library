@@ -39,6 +39,7 @@ public class AddBooksController {
 	public String login(Model model) {
 		return "addBook";
 	}
+	
 
 	/**
 	 * 書籍情報を登録する
