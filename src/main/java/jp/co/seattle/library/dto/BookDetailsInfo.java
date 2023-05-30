@@ -27,6 +27,8 @@ public class BookDetailsInfo {
 	private String thumbnailUrl;
 
 	private String thumbnailName;
+	
+	private String evaluation;
 
 	private String isbn;
 

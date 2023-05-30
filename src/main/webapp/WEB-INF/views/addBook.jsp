@@ -93,6 +93,24 @@
                         </c:if>
                     </div>
                     <div>
+                        <span>評価</span><span class="care care1">任意</span>
+                        <div class="rate-form">
+                             <input id="star5" type="radio" name="evaluation" value="★★★★★">
+                            <label for="star5">★</label> 
+                            <input id="star4" type="radio" name="evaluation" value="★★★★">
+                            <label for="star4">★</label>
+                            <input id="star3" type="radio" name="evaluation" value="★★★">
+                            <label for="star3">★</label> 
+                            <input id="star2" type="radio" name="evaluation" value="★★"> 
+                            <label for="star2">★</label> 
+                            <input id="star1" type="radio" name="evaluation" value="★"> 
+                            <label for="star1">★</label>
+                            <input id="star0" type="radio" name="evaluation" value="︎" checked="checked">
+                            <label for="star0">︎</label>
+                            
+                    </div>
+                    </div>
+                    <div>
                         <span>ISBN</span><span class="care care1">任意</span>
                         <c:if test="${!empty bookInfo}">
                             <input type="text" name="isbn" value="${bookInfo.isbn}">

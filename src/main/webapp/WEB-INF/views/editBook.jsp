@@ -91,9 +91,105 @@
                             value="${bookInfo.classification}">
                     </div>
                     <div>
+                        <span>評価</span><span class="care care1">任意</span>
+                        <div class="rate-form">
+                            <input id="star5" type="radio"
+                                name="evaluation" value="★★★★★">
+                            <label for="star5">★</label> <input
+                                id="star4" type="radio"
+                                name="evaluation" value="★★★★">
+                            <label for="star4">★</label> <input
+                                id="star3" type="radio"
+                                name="evaluation" value="★★★"> <label
+                                for="star3">★</label> <input id="star2"
+                                type="radio" name="evaluation"
+                                value="★★"> <label for="star2">★</label>
+                            <input id="star1" type="radio"
+                                name="evaluation" value="★"> <label
+                                for="star1">★</label>
+                                 <input id="star0" type="radio" name="evaluation" value="︎">
+                            <label for="star0">‍️</label>
+                        </div>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals('★★★★★'))}">
+                            <form methot="get" action="fvevaluation"
+                                name="fvevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals('★★★★'))}">
+                            <form methot="get" action="fuevaluation"
+                                name="fuevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals('★★★'))}">
+                            <form methot="get" action="thevaluation"
+                                name="thevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals('★★'))}">
+                            <form methot="get" action="twevaluation"
+                                name="twevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals('★'))}">
+                            <form methot="get" action="onevaluation"
+                                name="onevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <c:if
+                            test="${!(bookInfo.evaluation.equals(''))}">
+                            <form methot="get" action="eroevaluation"
+                                name="zeroevaluat">
+                                <input type="hidden" name="bookId"
+                                    value="${bookInfo.bookId}">
+                            </form>
+                        </c:if>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                            	  // ページが読み込まれた時に実行される処理
+
+                            	  var evaluation = "${bookInfo.evaluation}"; // サーバーサイドで取得した評価情報
+
+                            	  // 評価情報に基づいて星ボタンを操作
+                            	  if (evaluation === "★★★★★") {
+                            	    document.getElementById("star5").checked = true;
+                            	  } else if (evaluation === "★★★★") {
+                            	    document.getElementById("star4").checked = true;
+                            	  } else if (evaluation === "★★★") {
+                            	    document.getElementById("star3").checked = true;
+                            	  } else if (evaluation === "★★") {
+                            	    document.getElementById("star2").checked = true;
+                            	  } else if (evaluation === "★") {
+                            	    document.getElementById("star1").checked = true;
+                            	  } else if (evaluation === "") {
+                                    document.getElementById("star0").checked = true;
+                                  }           	
+                            	});         
+                            </script>
+                    </div>
+                    <div>
                         <span>ISBN</span><span class="care care1">任意</span>
-                        <input type="text" name="isbn"
-                            value="${bookInfo.isbn}">
+                        <c:if test="${!empty bookInfo}">
+                            <input type="text" name="isbn"
+                                value="${bookInfo.isbn}">
+                        </c:if>
+                        <c:if test="${empty bookInfo}">
+                            <input type="text" name="isbn">
+                        </c:if>
                     </div>
                     <div>
                         <span>説明文</span><span class="care care1">任意</span>
@@ -108,19 +204,20 @@
                     <input type="hidden" id="bookId" name="bookId"
                         value="${bookInfo.bookId}">
                 </div>
-            </div>
             <div class="bookBtn_box">
                 <button type="submit" id="add-btn"
                     class="btn_updateBook">更新</button>
-        </form>
+            </div>
         <form method="post" action="deleteBook" name="delete">
             <input type="hidden" id="bookId" name="bookId"
                 value="${bookInfo.bookId}">
             <div class="bookBtn_box">
                 <button type="submit" id="add-btn"
                     class="btn_deleteBook">削除</button>
+            </div>
         </form>
         </div>
+        </form>
     </main>
 </body>
 </html>

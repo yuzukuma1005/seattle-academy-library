@@ -105,4 +105,35 @@ public class BookUtil {
 			return true;
 		}
 	}
+	
+	
+	
+	
+	
+	
+	public List<String> evaluateBookInfo(BookDetailsInfo bookInfo, int starRating) {
+
+		//TODO　各星が押下された場合は文字列をリストに追加（タスク４）
+		List<String> evaluationList = new ArrayList<>();
+		// 評価
+		if (starRating == 1) {
+			sendRatingToDatabase(1);
+		} else if (starRating == 2) {
+			sendRatingToDatabase(2);
+		} else if (starRating == 3) {
+			sendRatingToDatabase(3);
+		} else if (starRating == 4) {
+			sendRatingToDatabase(4);
+		} else if (starRating == 5) {
+			sendRatingToDatabase(5);
+		}
+		return evaluationList;
+	}
+
+
+	private void sendRatingToDatabase(int rating) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
 }

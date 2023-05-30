@@ -43,7 +43,7 @@ public class BooksService {
 	
 	public List<BookInfo> sortGetBookListAsc() {
 
-		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）
+		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）追加実装
 		List<BookInfo> getedBookList = jdbcTemplate.query(
 				"SELECT * FROM books ORDER BY title ASC;",
 				new BookInfoRowMapper());
@@ -82,12 +82,13 @@ public class BooksService {
 	 * @return 書籍情報
 	 */
 	public BookDetailsInfo getBookInfo(int bookId) {
-		String sql = "SELECT id, title, author, publisher, publish_date, classification, isbn, description, thumbnail_url, thumbnail_name FROM books WHERE books.id = ? ORDER BY title ASC;";
-
+		String sql = "SELECT id, title, author, publisher, publish_date, classification, evaluation, isbn, description, thumbnail_url, thumbnail_name FROM books WHERE books.id = ? ORDER BY title ASC;";
+    
 		BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper(), bookId);
 
 		return bookDetailsInfo;
 	}
+	
 
 	/**
 	 * 書籍を登録する
@@ -98,11 +99,11 @@ public class BooksService {
 	public int registBook(BookDetailsInfo bookInfo) {
 		// TODO 取得した書籍情報を登録し、その書籍IDを返却するようにSQLを修正（タスク４）
 		
-		String sql = "INSERT INTO books(title, author, publisher, publish_date, classification, thumbnail_name, thumbnail_url, isbn, description, reg_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now()) RETURNING id;";
+		String sql = "INSERT INTO books(title, author, publisher, publish_date, classification, thumbnail_name, thumbnail_url, evaluation, isbn, description, reg_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now()) RETURNING id;";
 
 		int bookId = jdbcTemplate.queryForObject(sql, int.class, bookInfo.getTitle(), bookInfo.getAuthor(),
 				bookInfo.getPublisher(), bookInfo.getPublishDate(), bookInfo.getClassification(),
-				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), bookInfo.getIsbn(), bookInfo.getDescription());
+				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), bookInfo.getEvaluation(), bookInfo.getIsbn(), bookInfo.getDescription());
 		return bookId;
 	}
 
@@ -126,17 +127,17 @@ public class BooksService {
 		String sql;
 		if (bookInfo.getThumbnailUrl() == null) {
 			// TODO 取得した書籍情報を更新するようにSQLを修正（タスク５）
-			sql = "UPDATE books SET title = ?, author = ?, publisher = ?, publish_date = ?, classification = ?, isbn = ?, description = ?, upd_date = now() WHERE id = ?;";
+			sql = "UPDATE books SET title = ?, author = ?, publisher = ?, publish_date = ?, classification = ?, isbn = ?, description = ?, upd_date = now(), evaluation = ? WHERE id = ?;";
 			jdbcTemplate.update(sql, bookInfo.getTitle(), bookInfo.getAuthor(), bookInfo.getPublisher(),
 					bookInfo.getPublishDate(), bookInfo.getClassification(), bookInfo.getIsbn(),
-					bookInfo.getDescription(), bookInfo.getBookId());
+					bookInfo.getDescription(), bookInfo.getEvaluation(), bookInfo.getBookId());
 		} else {
 			// TODO 取得した書籍情報を更新するようにSQLを修正（タスク５）
-			sql = "UPDATE books SET title = ?, author = ?, publisher = ?, publish_date = ?, classification = ?, thumbnail_name = ?, thumbnail_url = ?, isbn = ?, description = ?, upd_date = now() WHERE id = ?;";
+			sql = "UPDATE books SET title = ?, author = ?, publisher = ?, publish_date = ?, classification = ?, thumbnail_name = ?, thumbnail_url = ?, isbn = ?, description = ?, upd_date = now(), evaluation = ? WHERE id = ?;";
 			jdbcTemplate.update(sql, bookInfo.getTitle(), bookInfo.getAuthor(), bookInfo.getPublisher(),
 					bookInfo.getPublishDate(), bookInfo.getClassification(), bookInfo.getThumbnailName(),
-					bookInfo.getThumbnailUrl(),
-					bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getBookId());
+					bookInfo.getThumbnailUrl(), bookInfo.getIsbn(), 
+					bookInfo.getDescription(), bookInfo.getEvaluation(), bookInfo.getBookId());
 		}
 	}
 
@@ -230,6 +231,9 @@ public class BooksService {
 		jdbcTemplate.update(sql, bookId);
 	}
 
+	
+	
+	
 	public List<BookInfo> getFavSearchList(String title) {
 		// 検索をかけて、得たい書籍情報を取得するようにSQLを修正（追加実装）
 		List<BookInfo> getedFavSearchList = jdbcTemplate.query(
@@ -306,14 +310,45 @@ public class BooksService {
 	public int favoriteBook(BookDetailsInfo bookInfo) {
 		// TODO 取得した書籍情報を登録し、その書籍IDを返却するようにSQLを修正（タスク４）
 		//String sql = "INSERT INTO books(title, author, publisher, publish_date, thumbnail_name, thumbnail_url, isbn, description, reg_date, upd_date) VALUES(?,?,?,?,?,?,?,?, now(),now()) RETURNING id;";
-		String sql = "INSERT INTO books(title, author, publisher, publish_date, classification, thumbnail_name, thumbnail_url, isbn, description, favorit, reg_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now()) RETURNING id;";
+		String sql = "INSERT INTO books(title, author, publisher, publish_date, classification, thumbnail_name, thumbnail_url, isbn, description, evaluation, favorit, reg_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now()) RETURNING id;";
 
 		int bookId = jdbcTemplate.queryForObject(sql, int.class, bookInfo.getTitle(), bookInfo.getAuthor(),
 				bookInfo.getPublisher(), bookInfo.getPublishDate(), bookInfo.getClassification(),
-				bookInfo.getThumbnailName(),
-				bookInfo.getThumbnailUrl(), bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getFavorit());
+				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), 
+				bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getEvaluation(),bookInfo.getFavorit());
 		return bookId;
 	}
+	
+	
+	
+	/**
+	 * 評価機能の追加実装
+	 * @param bookId
+	 */
+	public void zrEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
+		jdbcTemplate.update(sql, bookId);
+	}
+	public void fsEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
+		jdbcTemplate.update(sql, bookId);
+	}
 
+	public void scEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '2' WHERE id = ?";
+		jdbcTemplate.update(sql, bookId);
+	}
+	public void thEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '3' WHERE id = ?";
+		jdbcTemplate.update(sql, bookId);
+	}
+	public void foEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '4' WHERE id = ?";
+		jdbcTemplate.update(sql, bookId);
+	}
+	public void fiEvaluationList(int bookId) {
+		String sql = "UPDATE books SET evaluation = '5' WHERE id = ?";
+		jdbcTemplate.update(sql, bookId);
+	}
 }
 
