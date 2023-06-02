@@ -111,48 +111,49 @@ public class EditBookController {
 		return "redirect:/home";
 	}
 	
+	//いらないやつ
 	
-	@RequestMapping(value = "/fvevaluation", method = RequestMethod.POST)
-	public String fvevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.fiEvaluationList(bookId);
-		return "redirect:/home";
-	}
-	@RequestMapping(value = "/fuevaluation", method = RequestMethod.POST)
-	public String fuevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.foEvaluationList(bookId);
-		return "redirect:/home";
-	}
-	@RequestMapping(value = "/thevaluation", method = RequestMethod.POST)
-	public String thevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.thEvaluationList(bookId);
-		return "redirect:/home";
-	}
-	@RequestMapping(value = "/twevaluation", method = RequestMethod.POST)
-	public String twevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.scEvaluationList(bookId);
-		return "redirect:/home";
-	}
-	@RequestMapping(value = "/onevaluation", method = RequestMethod.POST)
-	public String onevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.fsEvaluationList(bookId);
-		return "redirect:/home";
-	}
-	@RequestMapping(value = "/zeroevaluation", method = RequestMethod.POST)
-	public String zeroevaluate(@RequestParam("bookId") int bookId, Model model) {
-		//お気に入りをDBに登録する（追加実装） 
-		//↓bookServiceの中のfavoriteListを実行する指示
-		booksService.zrEvaluationList(bookId);
-		return "redirect:/home";
-	}
+//	@RequestMapping(value = "/fvevaluation", method = RequestMethod.GET)
+//	public String fvevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//評価機能（追加実装） 
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.fiEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
+//	@RequestMapping(value = "/fuevaluation", method = RequestMethod.GET)
+//	public String fuevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//評価機能（追加実装）
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.foEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
+//	@RequestMapping(value = "/thevaluation", method = RequestMethod.GET)
+//	public String thevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//お気に入りをDBに登録する（追加実装） 
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.thEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
+//	@RequestMapping(value = "/twevaluation", method = RequestMethod.GET)
+//	public String twevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//お気に入りをDBに登録する（追加実装） 
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.scEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
+//	@RequestMapping(value = "/onevaluation", method = RequestMethod.GET)
+//	public String onevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//お気に入りをDBに登録する（追加実装） 
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.fsEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
+//	@RequestMapping(value = "/zeroevaluation", method = RequestMethod.GET)
+//	public String zeroevaluate(@RequestParam("bookId") int bookId, Model model) {
+//		//お気に入りをDBに登録する（追加実装） 
+//		//↓bookServiceの中のfavoriteListを実行する指示
+//		booksService.zrEvaluationList(bookId);
+//		return "redirect:/home";
+//	}
 
 }

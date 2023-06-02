@@ -34,7 +34,7 @@
         </div>
         <div class="c">
             <form action="select" class="search-form-005">
-                <label> <input type="text"
+                <label> <input type="text" name="keyword"
                     placeholder="キーワードを入力">
                 </label>
                 <button type="submit" aria-label="検索"></button>
@@ -107,7 +107,7 @@
                                 <li class="book_publisher">出版社：${bookInfo.publisher}</li>
                                 <li class="book_publish_date">出版日：${bookInfo.publishDate}</li>
                                 <li class="book_classification">ジャンル：${bookInfo.classification}</li>
-                                <li class="book_evaluation">評価:${bookInfo.evaluation}</li>
+                                <li class="book_evaluation">評価:<span class="evaluation_star">${bookInfo.evaluation}</span></li>
                                 <c:if
                                     test="${!(bookInfo.favorit.equals('like'))}">
                                     <form methot="get" action="fvbutton"

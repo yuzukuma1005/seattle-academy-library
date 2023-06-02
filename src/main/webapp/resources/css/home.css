@@ -266,6 +266,10 @@ img.book_img {
 	font-size: 12px;
 }
 
+span.evaluation_star {
+	color: #ffcc00;
+}
+
 .rate-form {
   display: flex;
   flex-direction: row-reverse;

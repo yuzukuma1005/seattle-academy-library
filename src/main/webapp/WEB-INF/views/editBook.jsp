@@ -66,8 +66,8 @@
                                 </c:forEach>
                             </div>
                         </c:if>
-                        <span>書籍名</span()><span class="care care2">必須</span>
-                            <input type="text" name="title"
+                        <span>書籍名</span><span class="care care2">必須</span>
+                        <input type="text" name="title"
                             value="${bookInfo.title}">
                     </div>
                     <div>
@@ -106,11 +106,11 @@
                                 value="★★"> <label for="star2">★</label>
                             <input id="star1" type="radio"
                                 name="evaluation" value="★"> <label
-                                for="star1">★</label>
-                                 <input id="star0" type="radio" name="evaluation" value="︎">
+                                for="star1">★</label> <input id="star0"
+                                type="radio" name="evaluation" value="︎">
                             <label for="star0">‍️</label>
                         </div>
-                        <c:if
+                        <%--  <c:if
                             test="${!(bookInfo.evaluation.equals('★★★★★'))}">
                             <form methot="get" action="fvevaluation"
                                 name="fvevaluat">
@@ -157,29 +157,38 @@
                                 <input type="hidden" name="bookId"
                                     value="${bookInfo.bookId}">
                             </form>
-                        </c:if>
+                        </c:if> --%>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                            	  // ページが読み込まれた時に実行される処理
+																									document
+																											.addEventListener(
+																													"DOMContentLoaded",
+																													function() {
+																														// ページが読み込まれた時に実行される処理
 
-                            	  var evaluation = "${bookInfo.evaluation}"; // サーバーサイドで取得した評価情報
+																														var evaluation = "${bookInfo.evaluation}"; // サーバーサイドで取得した評価情報
 
-                            	  // 評価情報に基づいて星ボタンを操作
-                            	  if (evaluation === "★★★★★") {
-                            	    document.getElementById("star5").checked = true;
-                            	  } else if (evaluation === "★★★★") {
-                            	    document.getElementById("star4").checked = true;
-                            	  } else if (evaluation === "★★★") {
-                            	    document.getElementById("star3").checked = true;
-                            	  } else if (evaluation === "★★") {
-                            	    document.getElementById("star2").checked = true;
-                            	  } else if (evaluation === "★") {
-                            	    document.getElementById("star1").checked = true;
-                            	  } else if (evaluation === "") {
-                                    document.getElementById("star0").checked = true;
-                                  }           	
-                            	});         
-                            </script>
+																														// 評価情報に基づいて星ボタンを操作
+																														if (evaluation === "★★★★★") {
+																															document
+																																	.getElementById("star5").checked = true;
+																														} else if (evaluation === "★★★★") {
+																															document
+																																	.getElementById("star4").checked = true;
+																														} else if (evaluation === "★★★") {
+																															document
+																																	.getElementById("star3").checked = true;
+																														} else if (evaluation === "★★") {
+																															document
+																																	.getElementById("star2").checked = true;
+																														} else if (evaluation === "★") {
+																															document
+																																	.getElementById("star1").checked = true;
+																														} else if (evaluation === "") {
+																															document
+																																	.getElementById("star0").checked = true;
+																														}
+																													});
+																								</script>
                     </div>
                     <div>
                         <span>ISBN</span><span class="care care1">任意</span>
@@ -204,20 +213,17 @@
                     <input type="hidden" id="bookId" name="bookId"
                         value="${bookInfo.bookId}">
                 </div>
+            </div>
             <div class="bookBtn_box">
                 <button type="submit" id="add-btn"
                     class="btn_updateBook">更新</button>
-            </div>
+        </form>
         <form method="post" action="deleteBook" name="delete">
             <input type="hidden" id="bookId" name="bookId"
                 value="${bookInfo.bookId}">
-            <div class="bookBtn_box">
-                <button type="submit" id="add-btn"
-                    class="btn_deleteBook">削除</button>
-            </div>
+            <button type="submit" id="add-btn" class="btn_deleteBook">削除</button>
         </form>
         </div>
-        </form>
     </main>
 </body>
 </html>

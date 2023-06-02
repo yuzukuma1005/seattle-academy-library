@@ -321,34 +321,34 @@ public class BooksService {
 	
 	
 	
-	/**
-	 * 評価機能の追加実装
-	 * @param bookId
-	 */
-	public void zrEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
-		jdbcTemplate.update(sql, bookId);
-	}
-	public void fsEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
-		jdbcTemplate.update(sql, bookId);
-	}
-
-	public void scEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '2' WHERE id = ?";
-		jdbcTemplate.update(sql, bookId);
-	}
-	public void thEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '3' WHERE id = ?";
-		jdbcTemplate.update(sql, bookId);
-	}
-	public void foEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '4' WHERE id = ?";
-		jdbcTemplate.update(sql, bookId);
-	}
-	public void fiEvaluationList(int bookId) {
-		String sql = "UPDATE books SET evaluation = '5' WHERE id = ?";
-		jdbcTemplate.update(sql, bookId);
-	}
+//	/**
+//	 * 評価機能の追加実装
+//	 * @param bookId
+//	 */
+//	public void zrEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '0' WHERE id = ?;";
+//		jdbcTemplate.update(sql, bookId);
+//	}
+//	public void fsEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
+//		jdbcTemplate.update(sql, bookId);
+//	}
+//
+//	public void scEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '2' WHERE id = ?";
+//		jdbcTemplate.update(sql, bookId);
+//	}
+//	public void thEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '3' WHERE id = ?";
+//		jdbcTemplate.update(sql, bookId);
+//	}
+//	public void foEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '4' WHERE id = ?";
+//		jdbcTemplate.update(sql, bookId);
+//	}
+//	public void fiEvaluationList(int bookId) {
+//		String sql = "UPDATE books SET evaluation = '5' WHERE id = ?";
+//		jdbcTemplate.update(sql, bookId);
+//	}
 }
 
