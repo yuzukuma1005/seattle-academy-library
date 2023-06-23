@@ -46,6 +46,7 @@ public class BookUtil {
 		return errorList;
 	}
 
+	
 	/**
 	 * 日付の形式が正しいかどうか
 	 * 
@@ -95,13 +96,44 @@ public class BookUtil {
 	 * @return タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue。
 	 */
 	private static boolean isEmptyBookInfo(BookDetailsInfo bookInfo) {
-		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）
+		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）+　分類に入力がない場合もtrue
 		if (!StringUtils.isEmpty(bookInfo.getTitle()) && !StringUtils.isEmpty(bookInfo.getAuthor())
-				&& !StringUtils.isEmpty(bookInfo.getPublisher()) && !StringUtils.isEmpty(bookInfo.getPublishDate())) {
+				&& !StringUtils.isEmpty(bookInfo.getPublisher()) && !StringUtils.isEmpty(bookInfo.getPublishDate()) && !StringUtils.isEmpty(bookInfo.getClassification())) {
 			return false;
 		} else {
 
 			return true;
 		}
 	}
+	
+	
+	
+	
+	
+	
+	public List<String> evaluateBookInfo(BookDetailsInfo bookInfo, int starRating) {
+
+		//TODO　各星が押下された場合は文字列をリストに追加（タスク４）
+		List<String> evaluationList = new ArrayList<>();
+		// 評価
+		if (starRating == 1) {
+			sendRatingToDatabase(1);
+		} else if (starRating == 2) {
+			sendRatingToDatabase(2);
+		} else if (starRating == 3) {
+			sendRatingToDatabase(3);
+		} else if (starRating == 4) {
+			sendRatingToDatabase(4);
+		} else if (starRating == 5) {
+			sendRatingToDatabase(5);
+		}
+		return evaluationList;
+	}
+
+
+	private void sendRatingToDatabase(int rating) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
 }

@@ -34,11 +34,11 @@
         </div>
         <div class="c">
             <form action="select" class="search-form-005">
-                <label> <input type="text" name="keyword"
-                    placeholder="キーワードを入力">
-                </label>
-                <button type="submit" aria-label="検索"></button>
-            </form>
+    <label>
+        <input type="text" placeholder="キーワードを入力">
+    </label>
+    <button type="submit" aria-label="検索"></button>
+</form>
         </div>
     </header>
     <main>
@@ -48,7 +48,7 @@
             href="<%=request.getContextPath()%>/favoriteBook"
             class="btn_fav_book">お気に入り書籍</a>
         <div class="conteiner">
-            <form method="get" action="class">
+            <form method="get" action="favClass">
                 <label class="selectbox-003"> <select
                     name="category">
                         <option value="選択">--選択--</option>
@@ -76,16 +76,13 @@
                         class="button-002">並び替え</button>
                 </p>
             </form>
-            <form method="post" action="displayBookInfo" name="bookId">
-            <button type="submit" value="${bookInfo.bookId}" name="bookId" class="btn_evaluateBook">評価一覧</button>
-            </form>
         </div>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
                 <div class="error_msg">${resultMessage}</div>
             </c:if>
             <div>
-                <div class="booklist">
+                <div class="favoriteBook">
                     <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
                             <form method="get" class="book_thumnail"
@@ -110,8 +107,6 @@
                                 <li class="book_publisher">出版社：${bookInfo.publisher}</li>
                                 <li class="book_publish_date">出版日：${bookInfo.publishDate}</li>
                                 <li class="book_classification">ジャンル：${bookInfo.classification}</li>
-                                <li class="book_evaluation">評価:<span
-                                    class="evaluation_star">${bookInfo.evaluation}</span></li>
                                 <c:if
                                     test="${!(bookInfo.favorit.equals('like'))}">
                                     <form methot="get" action="fvbutton"
@@ -165,3 +160,4 @@
     </main>
 </body>
 </html>
+

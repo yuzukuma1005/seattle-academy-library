@@ -21,13 +21,19 @@ public class BookDetailsInfo {
 	private String publisher;
 
 	private String publishDate;
+	
+	private String classification;
 
 	private String thumbnailUrl;
 
 	private String thumbnailName;
+	
+	private String evaluation;
 
 	private String isbn;
 
 	private String description;
+	
+	private String favorit;
 
 }
