@@ -1,12 +1,16 @@
 package jp.co.seattle.library.service;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.dto.BookInfo;
@@ -38,9 +42,7 @@ public class BooksService {
 
 		return getedBookList;
 	}
-	
-	
-	
+
 	public List<BookInfo> sortGetBookListAsc() {
 
 		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）追加実装
@@ -83,12 +85,11 @@ public class BooksService {
 	 */
 	public BookDetailsInfo getBookInfo(int bookId) {
 		String sql = "SELECT id, title, author, publisher, publish_date, classification, evaluation, isbn, description, thumbnail_url, thumbnail_name FROM books WHERE books.id = ? ORDER BY title ASC;";
-    
+
 		BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper(), bookId);
 
 		return bookDetailsInfo;
 	}
-	
 
 	/**
 	 * 書籍を登録する
@@ -98,12 +99,13 @@ public class BooksService {
 	 */
 	public int registBook(BookDetailsInfo bookInfo) {
 		// TODO 取得した書籍情報を登録し、その書籍IDを返却するようにSQLを修正（タスク４）
-		
+
 		String sql = "INSERT INTO books(title, author, publisher, publish_date, classification, thumbnail_name, thumbnail_url, evaluation, isbn, description, reg_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now()) RETURNING id;";
 
 		int bookId = jdbcTemplate.queryForObject(sql, int.class, bookInfo.getTitle(), bookInfo.getAuthor(),
 				bookInfo.getPublisher(), bookInfo.getPublishDate(), bookInfo.getClassification(),
-				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), bookInfo.getEvaluation(), bookInfo.getIsbn(), bookInfo.getDescription());
+				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), bookInfo.getEvaluation(), bookInfo.getIsbn(),
+				bookInfo.getDescription());
 		return bookId;
 	}
 
@@ -136,7 +138,7 @@ public class BooksService {
 			sql = "UPDATE books SET title = ?, author = ?, publisher = ?, publish_date = ?, classification = ?, thumbnail_name = ?, thumbnail_url = ?, isbn = ?, description = ?, upd_date = now(), evaluation = ? WHERE id = ?;";
 			jdbcTemplate.update(sql, bookInfo.getTitle(), bookInfo.getAuthor(), bookInfo.getPublisher(),
 					bookInfo.getPublishDate(), bookInfo.getClassification(), bookInfo.getThumbnailName(),
-					bookInfo.getThumbnailUrl(), bookInfo.getIsbn(), 
+					bookInfo.getThumbnailUrl(), bookInfo.getIsbn(),
 					bookInfo.getDescription(), bookInfo.getEvaluation(), bookInfo.getBookId());
 		}
 	}
@@ -230,10 +232,10 @@ public class BooksService {
 		String sql = "UPDATE books SET favorit = 'unlike' WHERE id = ?";
 		jdbcTemplate.update(sql, bookId);
 	}
+	
+	
+	
 
-	
-	
-	
 	public List<BookInfo> getFavSearchList(String title) {
 		// 検索をかけて、得たい書籍情報を取得するようにSQLを修正（追加実装）
 		List<BookInfo> getedFavSearchList = jdbcTemplate.query(
@@ -314,41 +316,43 @@ public class BooksService {
 
 		int bookId = jdbcTemplate.queryForObject(sql, int.class, bookInfo.getTitle(), bookInfo.getAuthor(),
 				bookInfo.getPublisher(), bookInfo.getPublishDate(), bookInfo.getClassification(),
-				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(), 
-				bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getEvaluation(),bookInfo.getFavorit());
+				bookInfo.getThumbnailName(), bookInfo.getThumbnailUrl(),
+				bookInfo.getIsbn(), bookInfo.getDescription(), bookInfo.getEvaluation(), bookInfo.getFavorit());
 		return bookId;
 	}
-	
-	
-	
-//	/**
-//	 * 評価機能の追加実装
-//	 * @param bookId
-//	 */
-//	public void zrEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '0' WHERE id = ?;";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-//	public void fsEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '1' WHERE id = ?;";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-//
-//	public void scEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '2' WHERE id = ?";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-//	public void thEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '3' WHERE id = ?";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-//	public void foEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '4' WHERE id = ?";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-//	public void fiEvaluationList(int bookId) {
-//		String sql = "UPDATE books SET evaluation = '5' WHERE id = ?";
-//		jdbcTemplate.update(sql, bookId);
-//	}
-}
 
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	/**
+	 * APIを呼び出す
+	 * @param title2 書籍情報
+	 * @return メッセージ
+	 */
+
+	public String callAPI(BookDetailsInfo bookInfo, String title2, String title, Locale locale) {
+
+		//プロパティファイルからAPIのURLを取得
+		ResourceBundle rb = ResourceBundle.getBundle("display");
+		String url = rb.getString("url");
+		logger.info("API呼び出し", bookInfo);
+
+		try {
+			//API呼び出し
+			String responseMessage = restTemplate.postForObject(url, title2, String.class);
+
+			return responseMessage;
+
+		} catch (Exception e) {
+			//TODO 自動生成されたcatch ブロック
+			e.printStackTrace();
+			return "API接続に失敗しました";
+		}
+		
+	}
+}

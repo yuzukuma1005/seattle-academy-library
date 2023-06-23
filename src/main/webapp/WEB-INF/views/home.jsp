@@ -76,6 +76,9 @@
                         class="button-002">並び替え</button>
                 </p>
             </form>
+            <form method="post" action="displayBookInfo" name="bookId">
+            <button type="submit" value="${bookInfo.bookId}" name="bookId" class="btn_evaluateBook">評価一覧</button>
+            </form>
         </div>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
@@ -107,7 +110,8 @@
                                 <li class="book_publisher">出版社：${bookInfo.publisher}</li>
                                 <li class="book_publish_date">出版日：${bookInfo.publishDate}</li>
                                 <li class="book_classification">ジャンル：${bookInfo.classification}</li>
-                                <li class="book_evaluation">評価:<span class="evaluation_star">${bookInfo.evaluation}</span></li>
+                                <li class="book_evaluation">評価:<span
+                                    class="evaluation_star">${bookInfo.evaluation}</span></li>
                                 <c:if
                                     test="${!(bookInfo.favorit.equals('like'))}">
                                     <form methot="get" action="fvbutton"
